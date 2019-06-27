@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="user_profile right">
+        <img src="assets/img/new_logo.png" alt="Manga" class="user_img dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <!-- <a class="dropdown-item" [routerLink]="['/solider',current_user._id]">الصفحة الشخصية</a> -->
+            <a class="dropdown-item" href="#"></a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#" (click)="logout()">logout</a>
+        </div>
+        <!-- <span class="user_name">{{current_user.name}}</span> -->
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="btn-group menu-container" *ngFor="let menuItem of menuItems">
+            <a  *ngIf="menuItem.childerens" href="#" class="nav-link dropdown-toggle menu-item" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                {{menuItem.title}}
+            </a>
+            <a *ngIf="!menuItem.childerens" [routerLink]="[menuItem.path]" class="nav-link menu-item">
+                {{menuItem.title}}
+            </a>
+            
+            <div class="dropdown-menu" *ngIf="menuItem.childerens" >
+                <a class="dropdown-item" *ngFor="let childeren of menuItem.childerens" [routerLink]="[childeren.path]"> {{childeren.title}}</a>
+            </div>
+        </div>
+    </div>
+</nav>
