@@ -134,7 +134,24 @@ namespace Basty.Controllers
         [HttpPost("authenticate")]
         public IActionResult Authenticate([FromBody]User userParam)
         {
+
             var user =AuthenticateUser(userParam.UserName,userParam.Password);
+
+            if (user == null)
+                return BadRequest(new {data="", message = "Username or password is incorrect" });
+
+            return Ok(new {data=user, message = "User Found" });
+        }
+
+        [AllowAnonymous]
+        [HttpPost("signUp")]
+        public IActionResult AuthenticateSignUp([FromBody]User userParam)
+        {
+                _repoWrapper.User.Create(userParam);
+                _repoWrapper.Save();
+
+                var _obj=_repoWrapper.User.FindOne(e=>e.UserName==userParam.UserName);
+                var user =AuthenticateUser(_obj.UserName,_obj.Password);
 
             if (user == null)
                 return BadRequest(new {data="", message = "Username or password is incorrect" });

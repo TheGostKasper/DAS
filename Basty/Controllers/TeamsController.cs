@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Basty.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class TeamsController : ControllerBase

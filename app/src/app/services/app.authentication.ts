@@ -27,7 +27,7 @@ export class AuthenticationService {
     }
     signUp(user) {
         return new Observable(observer => {
-            this.http.post(`${this.ApiUrl}`, JSON.stringify(user), this.getHeader())
+            this.http.post(`${this.ApiUrl}/signUp`, JSON.stringify(user), this.getHeader())
                 .subscribe(
                     (response: Response) => {
                         observer.next(response);

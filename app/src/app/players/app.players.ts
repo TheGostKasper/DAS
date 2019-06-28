@@ -16,7 +16,7 @@ export class PlayerComponent implements OnInit {
     f_objs = [];
     bc_objs = [];
     teams = [];
-    u_Obj = { name: '',nationality:'', birthDate: '',teamId:1 }
+    u_Obj = { name: '',nationality:'', birthDate: '',teamId:'' }
     curr_Obj = { id: '', ...this.u_Obj }
     admin=false;
     srch: String = "";
@@ -54,6 +54,7 @@ export class PlayerComponent implements OnInit {
     }
 
     addPlayer(obj) {
+        console.log(obj);
         const _obj = { ...obj };
 
         this.crudService.post({
@@ -62,7 +63,7 @@ export class PlayerComponent implements OnInit {
         }).subscribe((res: any) => {
             this.displayError(res, _res => {
                 let n_obj=res.data;
-                n_obj.role = this.teams.filter(e => e.id == _obj.teamId)[0];
+                n_obj.team = this.teams.filter(e => e.teamId == _obj.teamId)[0];
                 this.f_objs.push(n_obj);
                 document.getElementById('cancelED').click();
             });
@@ -115,6 +116,7 @@ export class PlayerComponent implements OnInit {
     }
 
     displayError(res, callback) {
+        console.log(res);
         if (res.err) alert('Something went wrong, try again later');
         else callback(res);
     }

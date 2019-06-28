@@ -1,9 +1,14 @@
 .auth-wrapper {
     background: #a92943;
 }
-
+span.blue{
+    color: black;
+    font-size: 26px;
+    text-decoration-line: underline;
+    cursor: pointer;
+}
 .auth-wrapper .auth-box {
-    background: #a9294369;
+    background: #da6c6c;
     padding: 20px;
     box-shadow: 1px 0 20px rgba(0,0,0,.08);
     max-width: 400px;

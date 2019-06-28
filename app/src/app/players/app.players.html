@@ -125,7 +125,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="addModal">New User</h4>
+                    <h4 class="modal-title" id="addModal">New Player</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row form-group">
@@ -155,14 +155,14 @@
                             <select id="e_sec" name="e_sec" class="app-ctrl form-control"
                                 [(ngModel)]="u_Obj.teamId">
                                 <option value="">Select Team</option>
-                                <option *ngFor="let team of teams | slice:0:80 as total; index as i" value="{{team.id}}">
+                                <option *ngFor="let team of teams | slice:0:80 as total; index as i" value="{{team.teamId}}">
                                     {{team.name}}</option>
                             </select>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <div class="btn-group">
-                            <button type="button" class="bs-margin btn btn-danger" id="cancleEditable"
+                            <button type="button" class="bs-margin btn btn-danger" id="cancelED"
                                 data-dismiss="modal">
                                 Cancle
                             </button>

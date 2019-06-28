@@ -1,11 +1,11 @@
 <div class="auth-wrapper d-flex no-block justify-content-center align-items-center">
-    <div class="auth-box">
+    <div class="auth-box"  *ngIf="!auth">
         <div id="loginform">
             <div class="logo">
                 <span class="db">
                     <img alt="logo" src="./../../assets/img/logo-icon.png">
                 </span>
-                <h5 class="font-medium m-b-20">LogIn</h5>
+                <h5 class="font-medium m-b-20">Login <span class="pointer blue" (click)="auth=!auth">SignUp</span></h5>
             </div>
             <div class="row">
                 <div class="col-12">
@@ -31,6 +31,45 @@
                         <div class="form-group text-center">
                             <div class="col-xs-12 p-b-20">
                                 <input class="btn btn-block btn btn-info" type="submit" [disabled]="authForm.invalid" value="دخول">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="auth-box" *ngIf="auth">
+        <div class="loginform">
+            <div class="logo">
+                <span class="db">
+                    <img alt="logo" src="./../../assets/img/logo-icon.png">
+                </span>
+                <h5 class="font-medium m-b-20">SignUp <span class="pointer blue" (click)="auth=!auth">Login</span></h5>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <form class="form-horizontal m-t-20 loginform" id="signupform" #authSignUpForm="ngForm" (ngSubmit)="signUp(user)">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-name">
+                                    <i class="fa fa-user"></i>
+                                </span>
+                            </div>
+                            <input aria-describedby="basic-name" [(ngModel)]="user.username" name="sname" aria-label="Name" class="form-control form-control"
+                                placeholder="Enter your Name" type="text" required  id="sname">
+                        </div> 
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-pass">
+                                    <i class="fa fa-key fa-fw"></i>
+                                </span>
+                            </div>
+                            <input aria-describedby="basic-pass" aria-label="Password" name="spassword" [(ngModel)]="user.password" class="form-control form-control"
+                                placeholder="Your password" type="password" required>
+                        </div>
+                        <div class="form-group text-center">
+                            <div class="col-xs-12 p-b-20">
+                                <input class="btn btn-block btn btn-info" type="submit" [disabled]="authSignUpForm.invalid" value="SingUp">
                             </div>
                         </div>
                     </form>

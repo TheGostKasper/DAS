@@ -9,9 +9,10 @@ import { Encryption } from '../services/encryption';
 })
 export class LoginComponent implements OnInit {
     user: any = {
-        username: '', password: ''
+        username: '', password: '',roleId:1
     };
-
+    
+    auth=false;
     constructor(private authenticationService: AuthenticationService, private encryption: Encryption) { }
     ngOnInit() {
     }
@@ -23,12 +24,14 @@ export class LoginComponent implements OnInit {
     }
 
     signUp(user) {
+        user.roleId=2;
         this.authenticationService.signUp(this.retUserEnc(user)).subscribe((res: any) => {
             this.fellowLog(res);
         });
     }
 
     private retUserEnc(user){
+        alert('Your request being proccessing');
         const _user = { ...user };
         _user.password = this.encryption.b64EncodeUnicode(user.password);
         return _user;

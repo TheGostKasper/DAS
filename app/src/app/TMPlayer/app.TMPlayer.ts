@@ -29,8 +29,9 @@ export class TMPlayerComponent implements OnInit {
 
     ngOnInit() {
         this.getPlayers();
-        this.getTeams();
+        this.getCurrTeams();
         this.admin=this.checkAdmin();
+        if(this.admin) this.getTeams();
     }
     checkAdmin(){
         var crt=JSON.parse(localStorage.getItem('current_user'));
@@ -47,16 +48,27 @@ export class TMPlayerComponent implements OnInit {
                 
             });
     }
-    getTeams() {
-        this.crudService.get({
-            url: 'api/teams'
-        }).subscribe((res: any) => {
-            this.displayError(res, _res => {
-                this.teams = res.data;
-                let frt=this.bc_objs[0];
-                this.cuur_team=this.teams.filter(e=>e.teamId==frt.teamId)[0];
+
+    
+    getCurrTeams() {
+        this.route.paramMap.pipe(
+            switchMap((params: ParamMap) =>
+                this.crudService.get({  url: `api/teams/${params.get('id')}` })
+            )).subscribe((res: any) => {
+                this.displayError(res, _res => {
+                    this.cuur_team = _res.data;
+                });
             });
-        });
+    }
+
+    getTeams(){
+        this.crudService.get({
+            url: `api/teams` 
+       }).subscribe((res: any) => {
+           this.displayError(res, _res => {
+               this.teams = res.data;
+           });
+       });
     }
 
     addPlayer(obj) {

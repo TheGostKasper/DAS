@@ -18,7 +18,7 @@ using Basty.Helpers;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-
+using Newtonsoft.Json.Serialization;
 namespace Basty
 {
     public class Startup
@@ -38,7 +38,12 @@ namespace Basty
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
             // services.AddScoped<IUserService, UserService>();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc()
+            .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+            .AddJsonOptions(options => {
+                options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });;
 
 
 
